@@ -6,7 +6,7 @@ import {console} from "forge-std/console.sol";
 import "../src/INFTAgentV1.sol";
 import "../src/mocks/MockOracleVerifier.sol";
 
-contract INFTAgentV1Script is Script {
+contract INFTScript is Script {
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         
@@ -16,16 +16,17 @@ contract INFTAgentV1Script is Script {
         MockOracleVerifier oracle = new MockOracleVerifier();
         console.log("MockOracleVerifier deployed at:", address(oracle));
 
-        // Deploy SocialINFTAgent contract
-        SocialINFTAgent agent = new SocialINFTAgent(
-            "Social AI Agent NFT",
-            "SAINFT",
+        // Deploy INFT contract
+        INFT inft = new INFT(
+            "Intelligent NFT",
+            "INFT",
             address(oracle)
         );
-        console.log("SocialINFTAgent deployed at:", address(agent));
-        console.log("Owner:", agent.owner());
-        console.log("Mint Price:", agent.mintPrice());
-        console.log("Public Mint Enabled:", agent.publicMintEnabled());
+        console.log("INFT deployed at:", address(inft));
+        console.log("Owner:", inft.owner());
+        console.log("Oracle:", inft.oracle());
+        console.log("Next Token ID:", inft.getNextTokenId());
+        console.log("Total Supply:", inft.totalSupply());
 
         vm.stopBroadcast();
     }

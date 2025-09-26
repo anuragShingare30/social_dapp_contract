@@ -8,7 +8,7 @@ contract MockOracleVerifier {
         verificationResult = result;
     }
     
-    function verifyProof(bytes calldata /* proof */, bytes calldata /* context */) external view returns (bool) {
+    function verifyProof(bytes calldata /* proof */) external view returns (bool) {
         return verificationResult;
     }
 }
